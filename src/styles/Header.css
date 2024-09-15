@@ -1,0 +1,42 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: aliceblue;
+}
+img {
+    width: 150px;
+}
+ul {
+    display: flex;
+    list-style: none;
+}
+li {
+    list-style: none;
+    margin: 0 1rem;
+}
+li a {
+    text-decoration: none;
+    color: #333;
+}
+li a:hover {
+    color: #ff3333;
+}
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    img {
+        width: 150px;
+    }
+    ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    li {
+        margin: 0.5rem 0;
+    }
+}
+

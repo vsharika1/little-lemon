@@ -1,65 +1,95 @@
+/* HeroSection.css */
 #main-container-hero {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto;
     grid-gap: 2rem;
-    padding: 2rem;
-    background-color: aliceblue;
+    padding: 4rem 6rem; /* Increased padding for more space */
+    background-color: #f8f9fa; /* Neutral background for a modern look */
+    align-items: center;
 }
+
 #content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     margin-left: 2rem;
+    color: #333; /* Darker text color for better readability */
 }
+
 #content h1 {
-    font-size: 3rem;
+    font-size: 4rem; /* Larger font for a bold hero headline */
     margin-bottom: 1rem;
+    color: #495e57; /* A stylish dark green shade */
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-weight: bold;
 }
+
 #content h3 {
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Slightly larger */
     margin-bottom: 1rem;
+    color: #e91e63; /* A bold accent color */
 }
+
 #content p {
-    margin-bottom: 1rem;
-    width: 80%;
+    margin-bottom: 1.5rem;
+    width: 90%;
+    line-height: 1.6; /* Increased line-height for better readability */
+    font-size: 1.1rem;
+    color: #666; /* Softer gray for text paragraphs */
 }
+
 #image {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 2rem;
 }
+
 #image img {
     width: 100%;
+    height: auto;
     border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease; /* Animation for hover effect */
 }
-@media screen and (max-width: 768px) {
+
+#image img:hover {
+    transform: scale(1.05); /* Slight zoom on hover for interactivity */
+}
+
+@media screen and (max-width: 910px) {
     #main-container-hero {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-gap: 1rem;
+        grid-gap: 1.5rem;
+        padding: 2rem;
+        text-align: center;
     }
+
     #content {
         margin-left: 0;
+        align-items: center;
         justify-content: center;
     }
+
     #content h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
+
     #content h3 {
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
+
     #content p {
-        margin-bottom: 0.5rem;
         width: 100%;
     }
+
     #image {
         margin-right: 0;
     }
+
     #image img {
         width: 100%;
-        border-radius: 20px;
+        border-radius: 15px;
     }
 }

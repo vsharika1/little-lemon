@@ -8,7 +8,7 @@ function Highlights() {
     return (
         <div id="highlights-container">
             <div id="highlights-header">
-                <h2 className="highlights-title">Specials</h2>
+                <h2 className="highlights-title">Today's Specials</h2>
                 <button id="view-menu-button" className="button-primary">View Menu</button>
             </div>
             <div id="highlights-cards">

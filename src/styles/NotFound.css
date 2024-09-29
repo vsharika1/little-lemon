@@ -1,0 +1,61 @@
+.notfound-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    color: #495e57; /* Consistent with the rest of the website */
+    text-align: center;
+    padding: 1rem;
+}
+
+.notfound-container h1 {
+    font-size: 8rem;
+    font-weight: 700;
+    margin: 0;
+    color: #e91e63; /* Eye-catching color for the 404 number */
+}
+
+.notfound-container h2 {
+    font-size: 2rem;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.notfound-container p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.home-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #495e57;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.home-button:hover {
+    background-color: #333;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .notfound-container h1 {
+        font-size: 5rem;
+    }
+
+    .notfound-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .home-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}

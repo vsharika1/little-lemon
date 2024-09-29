@@ -34,13 +34,11 @@ li a {
 }
 
 li a:hover {
-    color: #ffffff;
-    background-color: #ff3333; 
-    border-radius: 5px;
+    color: #e91e63;
 }
 
 li a.active {
-    color: #ff3333;
+    color: #e91e63;
     font-weight: bold;
 }
 

@@ -1,5 +1,5 @@
 import "../styles/HeroSection.css"
-import restaurantImg from "../../public/og-image.jpg"
+import restaurantImg from "../assets/restaurant-inside.jpg"
 
 function HeroSection() {
     return (

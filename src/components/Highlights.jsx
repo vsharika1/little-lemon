@@ -3,12 +3,13 @@ import HighlightsCard from "./HighlightsCard";
 import LemonGrilledChicken from "../assets/lemon-grilled-chicken.webp"
 import ShrimpAvacadoSalad from "../assets/shrimp-avacado-salad.jpg"
 import LemonRicottaPasta from "../assets/lemon-ricotta-pasta.jpg"
+import ButterSalmon from "../assets/butter-salmon.jpg"
 
 function Highlights() {
     return (
         <div id="highlights-container">
             <div id="highlights-header">
-                <h2 className="highlights-title">Today's Specials</h2>
+                <h2 className="highlights-title">Today&apos;s Specials</h2>
                 <button id="view-menu-button" className="button-primary">View Menu</button>
             </div>
             <div id="highlights-cards">
@@ -29,6 +30,12 @@ function Highlights() {
                     name={"Lemon Ricotta Pasta with Spinach"} 
                     description={"Al dente pasta tossed in a creamy lemon ricotta sauce, sautéed spinach, and a sprinkle of Parmesan cheese, finished with fresh lemon zest for a bright and flavorful finish."} 
                     price={"$11.49"} 
+                />
+                <HighlightsCard 
+                    image={ButterSalmon} 
+                    name={"Lemon Garlic Butter Salmon"} 
+                    description={"A perfectly pan-seared salmon fillet drizzled with a zesty lemon garlic butter sauce, served with a side of roasted asparagus and herb-infused quinoa."} 
+                    price={"$14.49"} 
                 />
             </div>
         </div>

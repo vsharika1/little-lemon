@@ -1,25 +1,36 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header.jsx'
-import HeroSection from './components/HeroSection.jsx'
-import Highlights from './components/Highlights.jsx'
-import Testimonials from './components/Testimonials.jsx'
-import About from './components/About.jsx'
-import Footer from './components/Footer.jsx'
+import "./App.css";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+import Header from "./components/Header.jsx";
+
+const Home = lazy(() => import("./pages/Home"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const Menu = lazy(() => import("./pages/Menu"));
+const Reservations = lazy(() => import("./pages/Reservations"));
+const OrderOnline = lazy(() => import("./pages/OrderOnline"));
+const Login = lazy(() => import("./pages/Login"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <Router>
       <Header />
-      <HeroSection />
-      <Highlights />
-      <Testimonials />
-      <About />
-      <Footer />
-    </>
-  )
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/reservations" element={<Reservations />} />
+          <Route path="/order-online" element={<OrderOnline />} />
+          <Route path="/login" element={<Login />} />
+          {/* Fallback route */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </Router>
+  );
 }
 
-export default App
+export default App;

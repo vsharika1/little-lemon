@@ -2,10 +2,10 @@
 .about-container {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  grid-gap: 3rem;
-  padding: 4rem 5rem;
+  grid-gap: 2rem;
+  padding: 4rem 6rem;
   background-color: #fdfdfd;
-  align-items: start;
+  align-items: center;
 }
 
 /* Styling the content section */
@@ -31,7 +31,7 @@
 #chefs-images {
   position: relative;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 1rem;
 }
 

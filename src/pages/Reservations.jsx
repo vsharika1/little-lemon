@@ -1,7 +1,11 @@
+import ReservationHeader from "../components/ResrvationHeader";
+import ReserveATableForm from "../components/ReserveATableForm";
+
 function Reservations() {
     return (
         <>
-            <h1>Reservations Page</h1>
+            <ReservationHeader />
+            <ReserveATableForm />
         </>
     );
 }

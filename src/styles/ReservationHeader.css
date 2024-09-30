@@ -1,0 +1,58 @@
+/* Grid layout for the reservation header */
+#reservation-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Two equal columns for content and image */
+    grid-gap: 2rem;
+    align-items: center; /* Vertically center the content and image */
+    padding: 3rem 6rem;
+    background-color: #f8f9fa; /* Light background for contrast */
+}
+
+/* Content styling */
+#reservation-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#reservation-header-content h1 {
+    font-size: 2.5rem;
+    color: #495e57; /* Darker text for readability */
+    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif; /* Elegant font for headlines */
+}
+
+#reservation-header-content p {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Image styling */
+#reservation-header-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    #reservation-header {
+        grid-template-columns: 1fr; /* Stack content and image vertically */
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    #reservation-header-image {
+        margin-top: 2rem; /* Add spacing between content and image */
+    }
+
+    #reservation-header-content h1 {
+        font-size: 2rem;
+    }
+
+    #reservation-header-content p {
+        font-size: 1rem;
+    }
+}

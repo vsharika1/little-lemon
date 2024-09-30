@@ -1,0 +1,105 @@
+.reserve-form-container {
+  margin: 0 auto;
+  padding: 3rem 6rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reserve-form-container h1 {
+  text-align: start;
+  font-size: 2rem;
+  color: #495e57;
+  margin-bottom: 2rem;
+  font-family: "Playfair Display", serif;
+}
+
+.reserve-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-gap: 2rem; /* Space between columns and rows */
+  align-items: start;
+}
+
+.personal-details,
+.booking-details {
+  display: grid;
+  grid-gap: 1.5rem; /* Space between fields */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #e91e63;
+}
+
+.form-group select {
+  appearance: none; /* Remove the default dropdown arrow */
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNzA4ODUsMi42MjgyMUwyLjM5MzkzLDIuMDYyODNDNi40MjY4NCwtMS40MjA5Miw5LjU5Mzg2LDIuMTczNTUsMTMuNjExNSwyLjA4NzE5TDE0LjMwMDksMi42NTQwNEw4Ljk4NDUxLDEwLjI5MjVDOC42Njc4NSwxMC42NjQxLDguMTExNjksMTAuNjYxMyw3Ljc4NzU4LDEwLjI2NTZMMi4yOTkwMSwzLjA2NDM2QzEuOTc0MjUsMi43MTA0OSwxLjk5OTksMi4yNzQ4MSwyLjMxNzg5LDEuOTM5NzVMMi45OTk3NCwyLjU4NTY2QzIuOTcyNzksMi40NzY0NiwyLjY3ODQ2LDIuNTUwNTcsMi43MDE4OCwyLjYzNTA5TDEuNzA4ODUsMi42MjgyMVoiIGZpbGw9IiM0OTVlNTciLz4KPC9zdmc+Cg=="); /* Custom arrow icon */
+  background-repeat: no-repeat;
+  background-position: right 1rem center; /* Position the arrow to the right */
+  background-size: 12px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #e91e63; /* Highlight the border on focus */
+  background-color: #f5f5f5; /* Slightly different background color on focus */
+}
+
+.form-group select:hover {
+  border-color: #e91e63; /* Change border color on hover */
+}
+
+.form-group select option {
+  padding: 10px; /* Make the options more spaced out */
+}
+
+/* Submit button styling */
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #495e57;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #333;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .reserve-form {
+    grid-template-columns: 1fr; /* Single column layout for smaller screens */
+  }
+}

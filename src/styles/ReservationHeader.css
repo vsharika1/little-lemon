@@ -30,7 +30,7 @@
 
 /* Image styling */
 #reservation-header-image img {
-    width: 100%;
+    width: 85%;
     height: auto;
     border-radius: 10px; /* Rounded corners for a modern look */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */

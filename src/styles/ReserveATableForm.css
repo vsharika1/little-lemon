@@ -81,6 +81,13 @@
   padding: 10px; /* Make the options more spaced out */
 }
 
+/* Error message styling */
+.error-message {
+  color: #e91e63;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
 /* Submit button styling */
 .submit-button {
   padding: 0.75rem 1.5rem;
@@ -95,6 +102,28 @@
 
 .submit-button:hover {
   background-color: #333;
+}
+
+/* Custom Toast Styles */
+.custom-toast {
+  background-color: #495e57; /* Darker green background */
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.custom-toast h3 {
+  margin-top: 0;
+  color: #f4ce14; /* Light yellow for title */
+}
+
+.custom-toast p {
+  margin: 0.25rem 0;
+}
+
+.custom-toast strong {
+  color: #f4ce14; /* Light yellow for text highlights */
 }
 
 /* Responsive design for smaller screens */

@@ -1,29 +1,43 @@
-// ReserveATableForm.jsx
 import PropTypes from "prop-types";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/ReserveATableForm.css";
+import { submitAPI } from "../api"; // Import submit API function
 
-const getDateLimits = () => {
+// Function to get today's date in YYYY-MM-DD format
+const getTodayDate = () => {
   const today = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(today.getDate() + 7); // Add 7 days to today
-
-  const formatDate = (date) => date.toISOString().split("T")[0]; // Format as YYYY-MM-DD
-
-  return {
-    todayDate: formatDate(today),
-    maxDate: formatDate(maxDate),
-    currentTime: today.getTime(), // Get current time in milliseconds
-  };
+  return today.toISOString().split("T")[0]; // Format as YYYY-MM-DD
 };
 
-function ReserveATableForm({ availableTimes, handleBooking }) {
-  const { todayDate, maxDate, currentTime } = getDateLimits(); // Get the date and current time
+// Helper function to convert 24-hour time to a 12-hour format
+const formatTime = (time) => {
+  const [hour, minute] = time.split(":").map(Number);
+  const period = hour >= 12 ? "PM" : "AM";
+  const formattedHour = hour % 12 || 12; // Convert to 12-hour format, use 12 for 00 hours
+  return `${formattedHour}:${minute < 10 ? "0" : ""}${minute} ${period}`;
+};
 
-  // Define Yup validation schema
+// Filter available times to remove booked ones
+const filterAvailableTimes = (availableTimes, bookedTimes, date) => {
+  return availableTimes.filter((time) => {
+    return !bookedTimes.some(
+      (booked) => booked.date === date && booked.time === time
+    );
+  });
+};
+
+function ReserveATableForm({
+  availableTimes,
+  bookedTimes,
+  handleBooking,
+  dispatch,
+}) {
+  const todayDate = getTodayDate(); // Get today's date
+
+  // Yup validation schema for form validation
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required."),
     email: Yup.string()
@@ -38,62 +52,52 @@ function ReserveATableForm({ availableTimes, handleBooking }) {
     occasion: Yup.string().required("Please select an occasion."),
   });
 
-  // Function to filter today's available times (only show slots that are 2 hours ahead)
-  const filterTodayTimes = () => {
-    const now = new Date(); // Current time
-    return availableTimes.filter((time) => {
-      const [hours, minutes] = time.split(":"); // Extract hours and minutes from the time string
-      const timeInMs = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        hours,
-        minutes
-      ).getTime();
-      return timeInMs - currentTime >= 2 * 60 * 60 * 1000; // Only allow if the time is 2 hours ahead
-    });
-  };
-
   // Handle form submission
-  const handleSubmit = (values, { resetForm }) => {
-    toast.success(
-      <div>
-        <h3>🎉 Reservation Made Successfully!</h3>
-        <p>
-          <strong>Name:</strong> {values.fullName}
-        </p>
-        <p>
-          <strong>Email:</strong> {values.email}
-        </p>
-        <p>
-          <strong>Date:</strong> {values.date}
-        </p>
-        <p>
-          <strong>Time:</strong> {values.time}
-        </p>
-        <p>
-          <strong>Guests:</strong> {values.guests}
-        </p>
-        <p>
-          <strong>Occasion:</strong> {values.occasion}
-        </p>
-      </div>,
-      {
-        position: "top-right",
-        autoClose: 6000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        className: "custom-toast",
-      }
-    );
+  const handleSubmit = async (values, { resetForm }) => {
+    const success = await submitAPI(values); // Submit data using global API function
 
-    // Book the selected time for the selected date
-    handleBooking(values.date, values.time);
+    if (success) {
+      toast.success(
+        <div>
+          <h3>🎉 Reservation Made Successfully!</h3>
+          <p>
+            <strong>Name:</strong> {values.fullName}
+          </p>
+          <p>
+            <strong>Email:</strong> {values.email}
+          </p>
+          <p>
+            <strong>Date:</strong> {values.date}
+          </p>
+          <p>
+            <strong>Time:</strong> {values.time}
+          </p>
+          <p>
+            <strong>Guests:</strong> {values.guests}
+          </p>
+          <p>
+            <strong>Occasion:</strong> {values.occasion}
+          </p>
+        </div>,
+        {
+          position: "top-right",
+          autoClose: 6000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: "custom-toast",
+        }
+      );
 
-    // Reset form after submission
-    resetForm();
+      // Book the selected time for the selected date
+      handleBooking(values.date, values.time);
+
+      // Reset form after submission
+      resetForm();
+    } else {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -107,7 +111,7 @@ function ReserveATableForm({ availableTimes, handleBooking }) {
         initialValues={{
           fullName: "",
           email: "",
-          date: "",
+          date: todayDate,
           time: "",
           guests: 1,
           occasion: "",
@@ -159,7 +163,11 @@ function ReserveATableForm({ availableTimes, handleBooking }) {
                   id="date"
                   name="date"
                   min={todayDate}
-                  max={maxDate}
+                  value={values.date}
+                  onChange={(e) => {
+                    // Dispatch an action to update available times when the date changes
+                    dispatch({ type: "UPDATE_TIMES", payload: e.target.value });
+                  }}
                 />
                 <ErrorMessage
                   name="date"
@@ -172,18 +180,16 @@ function ReserveATableForm({ availableTimes, handleBooking }) {
                 <label htmlFor="time">Time</label>
                 <Field as="select" id="time" name="time">
                   <option value="">Select a Time</option>
-                  {/* Filter time slots for today if the user selects today's date */}
-                  {values.date === todayDate
-                    ? filterTodayTimes().map((availableTime, index) => (
-                        <option key={index} value={availableTime}>
-                          {availableTime}
-                        </option>
-                      ))
-                    : availableTimes.map((availableTime, index) => (
-                        <option key={index} value={availableTime}>
-                          {availableTime}
-                        </option>
-                      ))}
+                  {/* Filter and display available times, formatted to 12-hour */}
+                  {filterAvailableTimes(
+                    availableTimes,
+                    bookedTimes,
+                    values.date
+                  ).map((availableTime, index) => (
+                    <option key={index} value={availableTime}>
+                      {formatTime(availableTime)}
+                    </option>
+                  ))}
                 </Field>
                 <ErrorMessage
                   name="time"
@@ -235,6 +241,13 @@ function ReserveATableForm({ availableTimes, handleBooking }) {
 
 ReserveATableForm.propTypes = {
   availableTimes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  bookedTimes: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+    })
+  ).isRequired, // Make sure bookedTimes is required
+  dispatch: PropTypes.func.isRequired,
   handleBooking: PropTypes.func.isRequired,
 };
 

@@ -2,19 +2,18 @@ import { useReducer, useState } from "react";
 import ReservationHeader from "../components/ResrvationHeader";
 import ReserveATableForm from "../components/ReserveATableForm";
 import BookingSlotList from "../components/BookingSlotList";
+import { fetchAPI } from "../api"; // Adjust path if necessary
 
-// Function to initialize available times
 const initializeTimes = () => {
-  return ["12:00 PM", "1:00 PM", "2:00 PM", "6:00 PM", "7:00 PM", "8:00 PM"];
+  const today = new Date();
+  return fetchAPI(today); // Fetch initial times for today
 };
 
 const updateTimes = (state, action) => {
-  switch (action.type) {
-    case "UPDATE_TIMES":
-      return state;
-    default:
-      return state;
+  if (action.type === "UPDATE_TIMES") {
+    return fetchAPI(action.payload); // Fetch times for selected date
   }
+  return state;
 };
 
 function Reservations() {
@@ -23,11 +22,10 @@ function Reservations() {
     [],
     initializeTimes
   );
-  const [bookedTimes, setBookedTimes] = useState([]);
+  const [bookedTimes, setBookedTimes] = useState([]); // Add state for bookedTimes
 
-  // Handle booking submission and mark time as booked for a specific date
   const handleBooking = (date, time) => {
-    setBookedTimes([...bookedTimes, { date, time }]);
+    setBookedTimes([...bookedTimes, { date, time }]); // Add booking to bookedTimes
   };
 
   return (
@@ -39,8 +37,9 @@ function Reservations() {
       />
       <ReserveATableForm
         availableTimes={availableTimes}
-        dispatch={dispatch}
+        bookedTimes={bookedTimes} // Pass bookedTimes to ReserveATableForm
         handleBooking={handleBooking}
+        dispatch={dispatch}
       />
     </>
   );

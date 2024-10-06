@@ -1,8 +1,8 @@
-/* General layout and styling */
+/* General layout and styling for the booking slot list */
 .booking-slot-list {
   margin: 0 auto;
   padding: 3rem 6rem;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -10,54 +10,36 @@
 .booking-slot-header {
   text-align: start;
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: #495e57;
   font-family: "Playfair Display", serif;
 }
 
-/* Weekday section styling */
-.weekly-slots {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  grid-gap: 20px;
-}
-
-.day-slot {
-  background-color: #f7f9fb;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.day-slot h3 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-  color: #333;
-}
-
-/* Styling for the time slot section inside each day */
+/* Time slots section styling */
 .time-slots {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 1.5rem;
 }
 
+/* Styling for individual time slots */
 .booking-slot {
   padding: 10px;
   border-radius: 5px;
-  margin: 5px 0;
   text-align: center;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
   transition: all 0.3s ease;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
-.available {
+.booking-slot.available {
   background-color: #d4edda;
   color: #155724;
 }
 
-.booked {
+.booking-slot.booked {
   background-color: #f8d7da;
   color: #721c24;
   text-decoration: line-through;
@@ -65,11 +47,24 @@
 
 .booking-slot:hover {
   transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Message styling for no available slots */
+.no-slots-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
-  .weekly-slots {
+  .time-slots {
     grid-template-columns: 1fr;
   }
 }
